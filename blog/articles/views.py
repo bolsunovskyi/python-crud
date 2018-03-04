@@ -1,15 +1,23 @@
-from django.http import HttpResponse
-from .models import Article
-from django.core.exceptions import ObjectDoesNotExist
+from .models import Article, Category
+from .serializers import ArticleSerializer, CategorySerializer
+from rest_framework import generics
 
 
-def index(_):
-    return HttpResponse("Hello from mike")
+class ArticleListCreate(generics.ListCreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
 
 
-def get(_, id):
-    try:
-        article = Article.objects.get(pk=id)
-        return article
-    except ObjectDoesNotExist:
-        return HttpResponse("404")
+class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class CategoryListCreate(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer

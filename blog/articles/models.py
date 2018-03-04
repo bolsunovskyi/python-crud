@@ -11,7 +11,7 @@ class Category(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=200, null=False)
     body = models.TextField(null=False)
-    created_at = models.DateTimeField(auto_created=True, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
 
